@@ -77,7 +77,7 @@ public class MainView extends VerticalLayout {
 // Dodajte slušač događaja za gumb "SUBMIT"
         submitButton.addClickListener(e -> {
             // Preusmjeri korisnika na drugu stranicu
-            UI.getCurrent().navigate("second");
+            UI.getCurrent().navigate("journals");
         });
 
 
