@@ -6,7 +6,10 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.html.Anchor;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
@@ -35,11 +38,31 @@ public class JournalDetailsView extends VerticalLayout implements HasUrlParamete
             journal = optionalJournal.get();
             // Display journal details
             displayJournalDetails();
-        } else {
+        }  else {
             // Journal not found
-            add(new H1("Journal not found."));
+            Div notFoundDiv = new Div();
+            notFoundDiv.setText("Journal not found.");
+            getElement().executeJs("document.body.style.backgroundColor = '#D2B48C';");
+            notFoundDiv.getStyle().set("color", "#65493C"); // Postavite boju teksta na crvenu
+            notFoundDiv.getStyle().set("font-size", "32px"); // Postavite veličinu fonta na 20px
+            notFoundDiv.getStyle().set("font-weight", "bold"); // Postavite debljinu fonta na bold
+            notFoundDiv.getStyle().set("margin-top", "250px"); // Dodajte gornji margina od 20px
+            notFoundDiv.getStyle().set("padding", "20px"); // Dodajte padding od 20px
+            notFoundDiv.getStyle().set("border", "3px solid #65493C"); // Dodajte okvir od 2px debljine sa bojom teksta
+            notFoundDiv.getStyle().set("border-radius", "5px"); // Dodajte zaobljeni rub okvira
+            add(notFoundDiv);
+
+            Anchor goToJournalsLink = new Anchor("/journals", "Go to ");
+            Span journalsText = new Span("My Journals");
+            journalsText.getStyle().set("text-decoration", "underline"); // Podcrtavanje teksta
+            goToJournalsLink.getStyle().set("color", "#65493C"); // Postavite boju teksta na crvenu
+            goToJournalsLink.getStyle().set("font-size", "16px"); // Postavite veličinu fonta na 16px
+            goToJournalsLink.getStyle().set("font-weight", "bold"); // Postavite debljinu fonta na bold
+            goToJournalsLink.add(journalsText);
+            add(goToJournalsLink);
         }
     }
+
 
     private void displayJournalDetails() {
         // Clear existing content
