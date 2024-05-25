@@ -1,6 +1,9 @@
 package com.example.application.views.main;
 
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.icon.Icon;
@@ -8,8 +11,10 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouterLink;
 
 import java.time.LocalDate;
 
@@ -103,6 +108,44 @@ public class NewJournalView extends Div {
 
 // Add the title field below the date picker
         container.add(titleLayout);
+
+        // Create the text area for the journal entry
+        TextArea journalEntryTextArea = new TextArea();
+        journalEntryTextArea.setPlaceholder("Journal Entry");
+        journalEntryTextArea.getStyle().set("font-family", "Irish Grover"); // Set font
+        journalEntryTextArea.getStyle().set("color", "#000000"); // Set text color
+        journalEntryTextArea.getStyle().set("background-color", "#1A39601A"); // White background color
+        journalEntryTextArea.getStyle().set("border", "2px solid #5D5D5D"); // Thicker border
+        journalEntryTextArea.getStyle().set("border-radius", "10px"); // More rounded corners
+        journalEntryTextArea.getStyle().set("height", "200px"); // Increase height of the text area
+        journalEntryTextArea.getStyle().set("font-size", "16px"); // Increase font size inside the text area
+        journalEntryTextArea.getStyle().set("padding", "10px"); // Adjust padding
+        journalEntryTextArea.getStyle().set("width", "100%"); // Make the input field full width
+
+// Add the text area below the title field
+        container.add(journalEntryTextArea);
+
+// Create the button for saving the journal
+        Button saveButton = new Button("SAVE");
+        saveButton.getStyle().set("background-color", "#319104"); // Set background color
+        saveButton.getStyle().set("color", "#FFFFFF"); // Set text color
+        saveButton.getStyle().set("border-radius", "10px"); // Rounded corners
+        saveButton.getStyle().set("padding", "10px 20px"); // Padding
+        saveButton.getStyle().set("font-size", "16px"); // Font size
+
+        // Set the action to show a dialog
+        Dialog dialog = new Dialog();
+        dialog.add(new H1("Journal saved successfully"));
+        dialog.setWidth("300px");
+
+        saveButton.addClickListener(event -> {
+            dialog.open();
+            // Redirect to 'journals' route after a short delay
+            getUI().ifPresent(ui -> ui.navigate("journals"));
+        });
+
+        // Add the button to the container
+        container.add(saveButton);
 
         // Add the container to the view
         add(container);
