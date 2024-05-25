@@ -4,10 +4,12 @@ import com.example.application.models.Journal;
 import com.example.application.services.JournalService;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dialog.Dialog;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextArea;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
@@ -35,9 +37,7 @@ public class JournalDetailsView extends VerticalLayout implements HasUrlParamete
             displayJournalDetails();
         } else {
             // Journal not found
-            Div notFoundDiv = new Div();
-            notFoundDiv.setText("Journal not found.");
-            add(notFoundDiv);
+            add(new H1("Journal not found."));
         }
     }
 
@@ -51,26 +51,61 @@ public class JournalDetailsView extends VerticalLayout implements HasUrlParamete
 
         // Display journal details
         // Display journal date
-        Div dateDiv = new Div();
-        dateDiv.setText("Date: " + journal.getDate().toString());
-        add(dateDiv);
+        TextField dateField = new TextField();
+        dateField.setLabel("Date");
+        dateField.setValue(journal.getDate().toString());
+        dateField.setReadOnly(true);
+        dateField.getStyle().set("font-family", "Inria Serif"); // Set font
+        dateField.getStyle().set("color", "#D9D9D9A"); // Set text color
+        dateField.getStyle().set("background-color", "#1A39601A"); // White background color
+        dateField.getStyle().set("border", "2px solid #5D5D5D"); // Thicker border
+        dateField.getStyle().set("border-radius", "10px"); // More rounded corners
+        dateField.getStyle().set("height", "60px"); // Increase height of the text area
+        dateField.getStyle().set("font-size", "16px"); // Increase font size inside the text area
+        dateField.getStyle().set("padding", "0 10px"); // Adjust padding
+        dateField.setWidth("100%"); // Make the input field full width
+        add(dateField);
 
         // Display journal title
-        Div titleDiv = new Div();
-        titleDiv.setText("Title: " + journal.getName());
-        add(titleDiv);
+        TextField titleField = new TextField();
+        titleField.setLabel("Title");
+        titleField.setValue(journal.getName());
+        titleField.setReadOnly(true);
+        titleField.getStyle().set("font-family", "Irish Grover"); // Set font
+        titleField.getStyle().set("color", "#000000"); // Set text color
+        titleField.getStyle().set("background-color", "#1A39601A"); // White background color
+        titleField.getStyle().set("border", "2px solid #5D5D5D"); // Thicker border
+        titleField.getStyle().set("border-radius", "10px"); // More rounded corners
+        titleField.getStyle().set("height", "60px"); // Increase height of the text area
+        titleField.getStyle().set("font-size", "16px"); // Increase font size inside the text area
+        titleField.getStyle().set("padding", "0 10px"); // Adjust padding
+        titleField.setWidth("100%"); // Make the input field full width
+        add(titleField);
 
         // Display journal entry
-        Div entryDiv = new Div();
-        entryDiv.setText("Entry: " + journal.getDescription());
-        add(entryDiv);
+        TextArea entryArea = new TextArea();
+        entryArea.setLabel("Entry");
+        entryArea.setValue(journal.getDescription());
+        entryArea.setReadOnly(true);
+        entryArea.getStyle().set("font-family", "Irish Grover"); // Set font
+        entryArea.getStyle().set("color", "#D9D9D9A"); // Set text color
+        entryArea.getStyle().set("background-color", "#1A39601A"); // White background color
+        entryArea.getStyle().set("border", "2px solid #5D5D5D"); // Thicker border
+        entryArea.getStyle().set("border-radius", "10px"); // More rounded corners
+        entryArea.getStyle().set("height", "200px"); // Increase height of the text area
+        entryArea.getStyle().set("font-size", "16px"); // Increase font size inside the text area
+        entryArea.getStyle().set("padding", "10px"); // Adjust padding
+        entryArea.setWidth("100%"); // Make the input field full width
+        add(entryArea);
 
-        // Add edit button
-        Button editButton = new Button("Edit");
-        editButton.addClickListener(event -> {
-            // Redirect to edit page with journal ID as parameter
-            UI.getCurrent().navigate("journals/" + journal.getId());
+        Button backButton = new Button("Back to Journals");
+        backButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY); // Postavite primarnu temu gumba
+        backButton.getStyle().set("background-color", "#65493C"); // Postavite pozadinsku boju gumba
+        backButton.getStyle().set("color", "#FFFFFF"); // Postavite boju teksta na bijelu
+        backButton.addClickListener(event -> {
+            // Redirect to journals page
+            UI.getCurrent().navigate("journals");
         });
-        add(editButton);
+        add(backButton);
     }
 }
