@@ -70,6 +70,10 @@ public class JournalsView extends VerticalLayout {
         options.getStyle().set("color", "white");
         card.add(options);
 
+        card.addClickListener(event -> {
+            UI.getCurrent().navigate("/journals/" + journal.getId());
+        });
+
         return card;
     }
 

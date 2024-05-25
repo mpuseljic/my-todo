@@ -3,11 +3,19 @@ package com.example.application.models;
 import java.time.LocalDate;
 
 public class Journal {
+    private int id;
     private String name;
     private LocalDate date;
     private String description;
 
     // Getters and Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
