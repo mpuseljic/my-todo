@@ -4,6 +4,7 @@ import com.example.application.models.Journal;
 import com.example.application.services.JournalService;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -68,6 +69,23 @@ public class JournalsView extends VerticalLayout {
         Button options = new Button("...");
         options.getStyle().set("background", "none");
         options.getStyle().set("color", "white");
+
+        Dialog confirmDialog = new Dialog();
+        Button confirmButton = new Button("Delete");
+        confirmButton.getStyle().set("background-color", "red");
+        confirmButton.getStyle().set("color", "white");
+        confirmButton.addClickListener(e -> {
+            JournalService.deleteJournal(journal);
+            displayJournals();
+            confirmDialog.close();
+        });
+
+        Button cancelButton = new Button("Cancel", e -> confirmDialog.close());
+
+        confirmDialog.add(new H1("Are you sure you want to delete this journal?"), confirmButton, cancelButton);
+
+        options.addClickListener(e -> confirmDialog.open());
+
         card.add(options);
 
         card.addClickListener(event -> {

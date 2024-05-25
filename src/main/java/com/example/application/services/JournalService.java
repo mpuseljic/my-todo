@@ -3,6 +3,7 @@ package com.example.application.services;
 import com.example.application.models.Journal;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class JournalService {
@@ -17,11 +18,13 @@ public class JournalService {
         journal.setId(nextId++);
         journals.add(journal);
     }
-
     public static Journal getJournalById(int id) {
         return journals.stream()
                 .filter(journal -> journal.getId() == id)
                 .findFirst()
                 .orElse(null);
     }
+        public static void deleteJournal(Journal journal) {
+            journals.remove(journal);
+        }
 }
