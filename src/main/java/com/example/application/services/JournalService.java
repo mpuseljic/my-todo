@@ -5,6 +5,7 @@ import com.example.application.models.Journal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 public class JournalService {
     private static List<Journal> journals = new ArrayList<>();
@@ -18,11 +19,10 @@ public class JournalService {
         journal.setId(nextId++);
         journals.add(journal);
     }
-    public static Journal getJournalById(int id) {
+    public static Optional<Journal> getJournalById(int id) {
         return journals.stream()
                 .filter(journal -> journal.getId() == id)
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
         public static void deleteJournal(Journal journal) {
             journals.remove(journal);

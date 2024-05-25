@@ -89,7 +89,7 @@ public class JournalsView extends VerticalLayout {
         card.add(options);
 
         card.addClickListener(event -> {
-            UI.getCurrent().navigate("/journals/" + journal.getId());
+            UI.getCurrent().navigate("journal-details/" + journal.getId());
         });
 
         return card;
