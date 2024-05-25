@@ -1,30 +1,24 @@
 package com.example.application.views.main;
 
 import com.example.application.models.Journal;
-import com.vaadin.flow.component.Key;
+import com.example.application.services.JournalService;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
-import java.util.ArrayList;
+
 import java.util.List;
+
 @Route("journals")
 public class JournalsView extends VerticalLayout {
 
-    private final Grid<Journal> grid;
     private final Button addNewJournal;
-    private final List<Journal> journals;
-    private int journalCounter = 1;
-
 
     public JournalsView() {
         setAlignItems(Alignment.CENTER);
-        journals = new ArrayList<>();
-        grid = new Grid<>(Journal.class);
+
         H1 header = new H1("My Journals");
         addNewJournal = new Button("+ Create New", event -> createNewJournal());
         addNewJournal.getStyle().set("background-color", "#65493C");
@@ -33,11 +27,50 @@ public class JournalsView extends VerticalLayout {
         add(header, addNewJournal);
         add(createButtonWrapper(addNewJournal));
         getElement().executeJs("document.body.style.backgroundColor = '#D2B48C';");
+
+        displayJournals();
     }
+
     private void createNewJournal() {
-        String newJournalId = String.valueOf(journalCounter);
-        UI.getCurrent().navigate("/journals/" + newJournalId);
-        journalCounter++; // Inkrementiraj brojač
+        UI.getCurrent().navigate("/journals/" + (JournalService.getJournals().size() + 1));
+    }
+
+    private void displayJournals() {
+        removeAll(); // Clear existing content
+        H1 header = new H1("My Journals");
+        add(header);
+        List<Journal> journals = JournalService.getJournals();
+        for (Journal journal : journals) {
+            Div journalCard = createJournalCard(journal);
+            add(journalCard);
+        }
+        add(createButtonWrapper(addNewJournal));
+    }
+
+    private Div createJournalCard(Journal journal) {
+        Div card = new Div();
+        card.getStyle().set("background-color", "#65493C");
+        card.getStyle().set("color", "white");
+        card.getStyle().set("padding", "10px");
+        card.getStyle().set("margin", "10px 0");
+        card.getStyle().set("border-radius", "10px");
+        card.getStyle().set("display", "flex");
+        card.getStyle().set("justify-content", "space-between");
+        card.getStyle().set("align-items", "center");
+        card.getStyle().set("width", "90%");
+
+        // Journal title
+        Div title = new Div();
+        title.setText(journal.getName());
+        card.add(title);
+
+        // Placeholder for additional options
+        Button options = new Button("...");
+        options.getStyle().set("background", "none");
+        options.getStyle().set("color", "white");
+        card.add(options);
+
+        return card;
     }
 
     private Div createButtonWrapper(Button button) {
