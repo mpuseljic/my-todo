@@ -7,8 +7,7 @@ public class Journal {
     private String name;
     private LocalDate date;
     private String description;
-
-    // Getters and Setters
+    
     public int getId() {
         return id;
     }

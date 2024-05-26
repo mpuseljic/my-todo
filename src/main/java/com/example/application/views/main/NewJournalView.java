@@ -23,47 +23,44 @@ import java.time.LocalDate;
 public class NewJournalView extends Div {
 
     public NewJournalView() {
-        // Set the background color of the entire page
+
         getStyle().set("background-color", "#D2B48C");
         getStyle().set("height", "100vh");
         getStyle().set("margin", "0");
 
-        // Create header
         H1 header = new H1("Write new journal");
-        header.getStyle().set("color", "#000000"); // Set text color to black
+        header.getStyle().set("color", "#000000");
 
-        // Apply the dark brown frame style
         Div frame = new Div(header);
-        frame.getStyle().set("background-color", "#65493C"); // Dark brown color
-        frame.getStyle().set("padding", "20px"); // Padding inside the frame
-        frame.getStyle().set("border-radius", "10px"); // Optional: rounded corners
-        frame.getStyle().set("color", "#5D5D5D"); // Text color
-        frame.getStyle().set("text-align", "center"); // Center text horizontally
-        frame.getStyle().set("width", "100%"); // Full width
-        frame.getStyle().set("box-sizing", "border-box"); // Include padding in the width calculation
+        frame.getStyle().set("background-color", "#65493C");
+        frame.getStyle().set("padding", "20px");
+        frame.getStyle().set("border-radius", "10px");
+        frame.getStyle().set("color", "#5D5D5D");
+        frame.getStyle().set("text-align", "center");
+        frame.getStyle().set("width", "100%");
+        frame.getStyle().set("box-sizing", "border-box");
 
-        // Create a container for the frame
+
         VerticalLayout container = new VerticalLayout(frame);
         container.setWidthFull();
         container.setAlignItems(FlexComponent.Alignment.CENTER);
-        container.getStyle().set("padding-top", "20px"); // Top padding to position the frame near the top
+        container.getStyle().set("padding-top", "20px");
 
-        // Create the input field with today's date
+
         DatePicker datePicker = new DatePicker();
-        datePicker.setValue(LocalDate.now()); // Set today's date
+        datePicker.setValue(LocalDate.now());
         datePicker.setPlaceholder("Select date");
-        datePicker.getStyle().set("font-family", "Inria Serif"); // Set font
-        datePicker.getStyle().set("color", "#D9D9D9A"); // Set text color
-        datePicker.getStyle().set("background-color", "#1A39601A"); // White background color
-        datePicker.getStyle().set("border", "2px solid #5D5D5D"); // Thicker border
-        datePicker.getStyle().set("border-radius", "10px"); // More rounded corners
-        datePicker.getStyle().set("height", "60px"); // Increase height of the date picker
-        datePicker.getStyle().set("font-size", "16px"); // Increase font size inside the date picker
-        datePicker.getStyle().set("padding", "0 10px"); // Adjust padding
-        datePicker.setWidth("100%"); // Make the input field full width
+        datePicker.getStyle().set("font-family", "Inria Serif");
+        datePicker.getStyle().set("color", "#D9D9D9A");
+        datePicker.getStyle().set("background-color", "#1A39601A");
+        datePicker.getStyle().set("border", "2px solid #5D5D5D");
+        datePicker.getStyle().set("border-radius", "10px");
+        datePicker.getStyle().set("height", "60px");
+        datePicker.getStyle().set("font-size", "16px");
+        datePicker.getStyle().set("padding", "0 10px");
+        datePicker.setWidth("100%");
         datePicker.getStyle().set("color", "#5D5D5D");
 
-        // Add a calendar icon to the input field
         Icon calendarIcon = new Icon(VaadinIcon.CALENDAR);
         calendarIcon.getStyle().set("color", "#5D5D5D");
 
@@ -72,23 +69,21 @@ public class NewJournalView extends Div {
         datePickerLayout.setWidth("100%");
         datePickerLayout.expand(datePicker);
 
-        // Add the date picker below the dark brown section
         container.add(datePickerLayout);
 
-        // Create the title input field
         TextField titleField = new TextField();
         titleField.setPlaceholder("TITLE");
-        titleField.getStyle().set("font-family", "Irish Grover"); // Set font
-        titleField.getStyle().set("color", "#000000"); // Set text color
-        titleField.getStyle().set("background-color", "#1A39601A"); // White background color
-        titleField.getStyle().set("border", "2px solid #5D5D5D"); // Thicker border
-        titleField.getStyle().set("border-radius", "10px"); // More rounded corners
-        titleField.getStyle().set("height", "60px"); // Increase height of the title field
-        titleField.getStyle().set("font-size", "16px"); // Increase font size inside the title field
-        titleField.getStyle().set("padding", "0 10px"); // Adjust padding
-        titleField.setWidth("100%"); // Make the input field full width
+        titleField.getStyle().set("font-family", "Irish Grover");
+        titleField.getStyle().set("color", "#000000");
+        titleField.getStyle().set("background-color", "#1A39601A");
+        titleField.getStyle().set("border", "2px solid #5D5D5D");
+        titleField.getStyle().set("border-radius", "10px");
+        titleField.getStyle().set("height", "60px");
+        titleField.getStyle().set("font-size", "16px");
+        titleField.getStyle().set("padding", "0 10px");
+        titleField.setWidth("100%");
 
-        // Add an edit icon to the title field
+
         Icon editIcon = new Icon(VaadinIcon.PENCIL);
         editIcon.getStyle().set("color", "#5D5D5D");
 
@@ -97,34 +92,28 @@ public class NewJournalView extends Div {
         titleLayout.setWidth("100%");
         titleLayout.expand(titleField);
 
-        // Add the title field below the date picker
         container.add(titleLayout);
 
-        // Create the text area for the journal entry
         TextArea journalEntryTextArea = new TextArea();
         journalEntryTextArea.setPlaceholder("Journal Entry");
-        journalEntryTextArea.getStyle().set("font-family", "Irish Grover"); // Set font
-        journalEntryTextArea.getStyle().set("color", "#D9D9D9A"); // Set text color
-        journalEntryTextArea.getStyle().set("background-color", "#1A39601A"); // White background color
-        journalEntryTextArea.getStyle().set("border", "2px solid #5D5D5D"); // Thicker border
-        journalEntryTextArea.getStyle().set("border-radius", "10px"); // More rounded corners
-        journalEntryTextArea.getStyle().set("height", "200px"); // Increase height of the text area
-        journalEntryTextArea.getStyle().set("font-size", "16px"); // Increase font size inside the text area
-        journalEntryTextArea.getStyle().set("padding", "10px"); // Adjust padding
-        journalEntryTextArea.setWidth("100%"); // Make the input field full width
+        journalEntryTextArea.getStyle().set("font-family", "Irish Grover");
+        journalEntryTextArea.getStyle().set("color", "#D9D9D9A");
+        journalEntryTextArea.getStyle().set("background-color", "#1A39601A");
+        journalEntryTextArea.getStyle().set("border-radius", "10px");
+        journalEntryTextArea.getStyle().set("height", "200px");
+        journalEntryTextArea.getStyle().set("font-size", "16px");
+        journalEntryTextArea.getStyle().set("padding", "10px");
+        journalEntryTextArea.setWidth("100%");
 
-        // Add the text area below the title field
         container.add(journalEntryTextArea);
 
-        // Create the button for saving the journal
         Button saveButton = new Button("SAVE");
-        saveButton.getStyle().set("background-color", "#319104"); // Set background color
-        saveButton.getStyle().set("color", "#FFFFFF"); // Set text color
-        saveButton.getStyle().set("border-radius", "10px"); // Rounded corners
-        saveButton.getStyle().set("padding", "10px 20px"); // Padding
-        saveButton.getStyle().set("font-size", "16px"); // Font size
+        saveButton.getStyle().set("background-color", "#319104");
+        saveButton.getStyle().set("color", "#FFFFFF");
+        saveButton.getStyle().set("border-radius", "10px");
+        saveButton.getStyle().set("padding", "10px 20px");
+        saveButton.getStyle().set("font-size", "16px");
 
-        // Set the action to show a dialog
         Dialog dialog = new Dialog();
         dialog.add(new H1("Journal saved successfully"));
         dialog.setWidth("300px");
@@ -137,14 +126,11 @@ public class NewJournalView extends Div {
             JournalService.addJournal(newJournal);
 
             dialog.open();
-            // Redirect to 'journals' route after a short delay
             getUI().ifPresent(ui -> ui.navigate("journals"));
         });
 
-        // Add the button to the container
         container.add(saveButton);
 
-        // Add the container to the view
         add(container);
     }
 }

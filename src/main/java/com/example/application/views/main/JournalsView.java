@@ -62,12 +62,12 @@ public class JournalsView extends VerticalLayout {
         card.getStyle().set("align-items", "center");
         card.getStyle().set("width", "90%");
 
-        // Journal title
+
         Div title = new Div();
         title.setText(journal.getName());
         card.add(title);
 
-        // Button for options
+
         Icon optionsIcon = new Icon(VaadinIcon.ELLIPSIS_DOTS_V);
         optionsIcon.getStyle().set("color", "white");
         Button options = new Button(optionsIcon);
